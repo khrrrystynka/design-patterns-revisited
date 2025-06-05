@@ -1,6 +1,10 @@
 package com.jewelryshop.strategy;
 
-@FunctionalInterface
-public interface DiscountStrategy {
-    double applyDiscount(double price);
+import java.util.function.Function;
+
+public class DiscountStrategy {
+    public static double applyDiscount(Function<Double, Double> strategy, double price) {
+        return strategy.apply(price);
+    }
 }
+

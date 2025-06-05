@@ -1,6 +1,9 @@
 package com.jewelryshop.factory;
 
-@FunctionalInterface
-public interface JewelryFactory {
-    Jewelry create();
+import java.util.function.Supplier;
+
+public class JewelryFactory {
+    public static <T> T create(Supplier<T> supplier) {
+        return supplier.get();
+    }
 }
