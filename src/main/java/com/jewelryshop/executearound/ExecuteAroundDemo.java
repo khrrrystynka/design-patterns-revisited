@@ -1,15 +1,12 @@
 package com.jewelryshop.executearound;
 
 public class ExecuteAroundDemo {
-    public static void main(String[] args) {
-        String result = JewelryFileProcessor.processFile("jewelry.txt", reader -> {
-            try {
-                return reader.readLine();
-            } catch (Exception e) {
-                return "Error reading file";
-            }
+    public static void run() {
+        ExecuteAround.withConnection(conn -> {
+            System.out.println("Using connection: " + conn);
+            // simulate DB operation
+            System.out.println("Saving jewelry item...");
         });
-
-        System.out.println("First line: " + result);
     }
 }
+

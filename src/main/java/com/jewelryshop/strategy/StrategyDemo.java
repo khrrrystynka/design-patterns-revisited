@@ -1,16 +1,17 @@
 package com.jewelryshop.strategy;
-import java.util.function.Function;
+
+import java.math.BigDecimal;
 
 public class StrategyDemo {
-    public static void main(String[] args) {
-        double price = 1000.0;
+    public static void run() {
+        DiscountStrategy holiday = price -> price.multiply(new BigDecimal("0.8"));
+        DiscountStrategy vip = price -> price.multiply(new BigDecimal("0.9"));
+        DiscountStrategy noDiscount = price -> price;
 
-        Function<Double, Double> noDiscount = p -> p;
-        Function<Double, Double> seasonalDiscount = p -> p * 0.9;
-        Function<Double, Double> vipDiscount = p -> p * 0.8;
+        BigDecimal price = new BigDecimal("1000");
 
-        System.out.println("No Discount: " + DiscountStrategy.applyDiscount(noDiscount, price));
-        System.out.println("Seasonal Discount: " + DiscountStrategy.applyDiscount(seasonalDiscount, price));
-        System.out.println("VIP Discount: " + DiscountStrategy.applyDiscount(vipDiscount, price));
+        System.out.println("Holiday price: " + holiday.apply(price));
+        System.out.println("VIP price: " + vip.apply(price));
+        System.out.println("Regular price: " + noDiscount.apply(price));
     }
 }

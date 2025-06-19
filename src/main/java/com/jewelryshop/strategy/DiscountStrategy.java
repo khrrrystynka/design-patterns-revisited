@@ -1,10 +1,8 @@
 package com.jewelryshop.strategy;
 
-import java.util.function.Function;
+import java.math.BigDecimal;
 
-public class DiscountStrategy {
-    public static double applyDiscount(Function<Double, Double> strategy, double price) {
-        return strategy.apply(price);
-    }
+@FunctionalInterface
+public interface DiscountStrategy {
+    BigDecimal apply(BigDecimal price);
 }
-

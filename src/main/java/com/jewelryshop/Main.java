@@ -1,44 +1,22 @@
 package com.jewelryshop;
 
-import com.jewelryshop.strategy.DiscountStrategy;
-import com.jewelryshop.factory.*;
-import com.jewelryshop.decorator.*;
-import com.jewelryshop.executearound.JewelryFileProcessor;
-
-import java.util.function.Function;
-import java.util.function.Supplier;
+import com.jewelryshop.strategy.StrategyDemo;
+import com.jewelryshop.factory.FactoryDemo;
+import com.jewelryshop.decorator.DecoratorDemo;
+import com.jewelryshop.executearound.ExecuteAroundDemo;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== Jewelry Shop Functional Patterns Demo ===");
+        System.out.println("=== Strategy Pattern ===");
+        StrategyDemo.run();
 
-        // --- Strategy Pattern ---
-        double price = 1500.0;
-        Function<Double, Double> seasonalDiscount = p -> p * 0.9;
-        double discountedPrice = DiscountStrategy.applyDiscount(seasonalDiscount, price);
-        System.out.println("\n[Strategy] Seasonal discount on " + price + " = " + discountedPrice);
+        System.out.println("\n=== Factory Method ===");
+        FactoryDemo.run();
 
-        // --- Factory Method Pattern ---
-        Supplier<Ring> ringSupplier = () -> new Ring("Gold", 18.0);
-        Supplier<Necklace> necklaceSupplier = () -> new Necklace("Platinum", 50);
-        Ring ring = JewelryFactory.create(ringSupplier);
-        Necklace necklace = JewelryFactory.create(necklaceSupplier);
-        System.out.println("\n[Factory Method] Created ring: " + ring);
-        System.out.println("[Factory Method] Created necklace: " + necklace);
+        System.out.println("\n=== Decorator ===");
+        DecoratorDemo.run();
 
-        // --- Decorator Pattern ---
-        Jewelry baseRing = new BaseRing();
-        Jewelry engravedRing = EngravingDecorator.withEngraving(baseRing, "Forever Yours");
-        System.out.println("\n[Decorator] " + engravedRing.description());
-
-        // --- Execute Around Pattern ---
-        String firstLine = JewelryFileProcessor.processFile("jewelry.txt", reader -> {
-            try {
-                return reader.readLine();
-            } catch (Exception e) {
-                return "Could not read file.";
-            }
-        });
-        System.out.println("\n[Execute Around] First line of 'jewelry.txt': " + firstLine);
+        System.out.println("\n=== Execute Around ===");
+        ExecuteAroundDemo.run();
     }
 }

@@ -1,9 +1,11 @@
 package com.jewelryshop.factory;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class JewelryFactory {
-    public static <T> T create(Supplier<T> supplier) {
-        return supplier.get();
-    }
+    public static final Function<String, Jewelry> create = type -> switch (type.toLowerCase()) {
+        case "ring" -> new Jewelry("Ring", "Gold");
+        case "necklace" -> new Jewelry("Necklace", "Silver");
+        default -> new Jewelry("Unknown", "Metal");
+    };
 }
